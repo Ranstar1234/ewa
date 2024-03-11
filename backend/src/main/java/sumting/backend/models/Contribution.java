@@ -106,15 +106,12 @@ public class Contribution extends AbstractEntityModel<Contribution> {
         return LocalDate.of(year, month, day);
     }
 
-
-    @Override
-    public int getKey() {
-        return this.contributionKey;
+    public int getContributionKey() {
+        return contributionKey;
     }
 
-    @Override
-    public void setKey(int key) {
-        this.contributionKey = key;
+    public void setContributionKey(int contributionKey) {
+        this.contributionKey = contributionKey;
     }
 
     public LocalDate getCreatedAt() {
@@ -129,8 +126,8 @@ public class Contribution extends AbstractEntityModel<Contribution> {
         return contributionImg;
     }
 
-    public void setContributionImg(String projectImg) {
-        this.contributionImg = projectImg;
+    public void setContributionImg(String contributionImg) {
+        this.contributionImg = contributionImg;
     }
 
     public double getLatitude() {
@@ -149,27 +146,19 @@ public class Contribution extends AbstractEntityModel<Contribution> {
         this.longitude = longitude;
     }
 
-    public Partner getPartnerKey() {
-        return partnerKey;
-    }
-
-    public void setPartnerKey(Partner partnerKey) {
-        this.partnerKey = partnerKey;
-    }
-
-    public int getContributionKey() {
-        return contributionKey;
-    }
-
-    public void setContributionKey(int contributionKey) {
-        this.contributionKey = contributionKey;
-    }
-
     public int getProjectKey() {
         return projectKey;
     }
 
     public void setProjectKey(int projectKey) {
         this.projectKey = projectKey;
+    }
+
+    public Partner getPartnerKey() {
+        return partnerKey;
+    }
+
+    public void setPartnerKey(Partner partnerKey) {
+        this.partnerKey = partnerKey;
     }
 }

@@ -71,30 +71,12 @@ public class Project extends AbstractEntityModel<Project> {
         this.setBucket(description);
     }
 
-    @Override
-    public int getKey() {
+    public int getProjectKey() {
         return projectKey;
     }
 
-    @Override
-    public void setKey(int key) {
-        this.projectKey = key;
-    }
-
-    public String getBucket() {
-        return bucket;
-    }
-
-    public void setBucket(String description) {
-        this.bucket = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String descriptionDetail) {
-        this.description = descriptionDetail;
+    public void setProjectKey(int projectKey) {
+        this.projectKey = projectKey;
     }
 
     public String getName() {
@@ -103,5 +85,29 @@ public class Project extends AbstractEntityModel<Project> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBucket() {
+        return bucket;
+    }
+
+    public void setBucket(String bucket) {
+        this.bucket = bucket;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<String> getBucketOptions() {
+        return bucketOptions;
+    }
+
+    public List<String> getDescriptionDetailList() {
+        return descriptionDetailList;
     }
 }

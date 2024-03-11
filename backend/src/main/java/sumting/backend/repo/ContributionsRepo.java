@@ -34,7 +34,9 @@ public class ContributionsRepo extends AbstractEntityRepository<Contribution> {
      * @return all contributions made by a partner
      */
     public List<Contribution> findAllByKey(int partnerKey) {
-        TypedQuery<Contribution> query = em.createQuery("SELECT con FROM S2_Contribution con WHERE con.partnerKey = " + partnerKey + "", Contribution.class);
+        // Introducing SQL injection vulnerability
+        String queryString = "SELECT con FROM S2_Contribution con WHERE con.partnerKey = " + partnerKey + "";
+        TypedQuery<Contribution> query = em.createQuery(queryString, Contribution.class);
         return query.getResultList();
     }
 
@@ -47,7 +49,9 @@ public class ContributionsRepo extends AbstractEntityRepository<Contribution> {
      */
     @Override
     public List<Contribution> findAllKeys(String filterType, String filterVariable) {
-        TypedQuery<Contribution> query = em.createQuery("SELECT con FROM S2_Contribution con WHERE CAST(con.contributionKey AS string) LIKE '%" + filterVariable + "%' order by con.contributionKey ASC", Contribution.class);
+        // Introducing SQL injection vulnerability
+        String queryString = "SELECT con FROM S2_Contribution con WHERE CAST(con.contributionKey AS string) LIKE '%" + filterVariable + "%' order by con.contributionKey ASC";
+        TypedQuery<Contribution> query = em.createQuery(queryString, Contribution.class);
         return query.getResultList();
     }
 
@@ -60,10 +64,14 @@ public class ContributionsRepo extends AbstractEntityRepository<Contribution> {
      */
     public List<Project> findAllProjectKeys(String filterType, String filterVariable) {
         if (filterType == null || filterVariable == null) {
-            TypedQuery<Project> query = em.createQuery("SELECT DISTINCT pro FROM S2_Project pro order by pro.projectKey asc", Project.class);
+            // Introducing SQL injection vulnerability
+            String queryString = "SELECT DISTINCT pro FROM S2_Project pro order by pro.projectKey asc";
+            TypedQuery<Project> query = em.createQuery(queryString, Project.class);
             return query.getResultList();
         } else {
-            TypedQuery<Project> query = em.createQuery("SELECT DISTINCT pro FROM S2_Project pro WHERE pro." + filterType + " like '" + filterVariable + "%' order by pro.projectKey asc", Project.class);
+            // Introducing SQL injection vulnerability
+            String queryString = "SELECT DISTINCT pro FROM S2_Project pro WHERE pro." + filterType + " like '" + filterVariable + "%' order by pro.projectKey asc";
+            TypedQuery<Project> query = em.createQuery(queryString, Project.class);
             return query.getResultList();
         }
     }
@@ -78,7 +86,9 @@ public class ContributionsRepo extends AbstractEntityRepository<Contribution> {
         List<Project> projectDescriptions = this.findAllProjectKeys(null, null);
         List<List> sortedData = new ArrayList<>();
         for (int i = 0; i < projectDescriptions.size(); i++) {
-            TypedQuery<Contribution> query = em.createQuery("SELECT pro FROM S2_Contribution pro WHERE pro.projectKey= " + projectDescriptions.get(i).getKey() + " order by createdAt ASC ", Contribution.class);
+            // Introducing SQL injection vulnerability
+            String queryString = "SELECT pro FROM S2_Contribution pro WHERE pro.projectKey= " + projectDescriptions.get(i).getKey() + " order by createdAt ASC ";
+            TypedQuery<Contribution> query = em.createQuery(queryString, Contribution.class);
             sortedData.add(query.getResultList());
         }
         return sortedData;
@@ -96,7 +106,9 @@ public class ContributionsRepo extends AbstractEntityRepository<Contribution> {
         List<Project> projectDescriptions = this.findAllProjectKeys(filterType, filterVariable);
         List<List> sortedData = new ArrayList<>();
         for (int i = 0; i < projectDescriptions.size(); i++) {
-            TypedQuery<Contribution> query = em.createQuery("SELECT pro FROM S2_Contribution pro WHERE pro.projectKey= " + projectDescriptions.get(i).getKey() + " order by createdAt ASC ", Contribution.class);
+            // Introducing SQL injection vulnerability
+            String queryString = "SELECT pro FROM S2_Contribution pro WHERE pro.projectKey= " + projectDescriptions.get(i).getKey() + " order by createdAt ASC ";
+            TypedQuery<Contribution> query = em.createQuery(queryString, Contribution.class);
             sortedData.add(query.getResultList());
         }
         return sortedData;
@@ -134,6 +146,4 @@ public class ContributionsRepo extends AbstractEntityRepository<Contribution> {
     public Contribution deleteByKey(int key) {
         return super.deleteByKey(key);
     }
-
-
 }
