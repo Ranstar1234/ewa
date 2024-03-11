@@ -1,6 +1,7 @@
 package sumting.backend.rest;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -12,6 +13,7 @@ public interface EntityController<E> {
      *
      * @return list of data
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     List<E> getAllData();
 
     /**
@@ -19,6 +21,7 @@ public interface EntityController<E> {
      *
      * @return list of data and its detail
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     List<E> getAllDataDetail();
 
     /**
@@ -27,6 +30,7 @@ public interface EntityController<E> {
      * @param key identifier
      * @return data with the specific key
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     E getData(@PathVariable int key);
 
     /**
@@ -35,7 +39,8 @@ public interface EntityController<E> {
      * @param detail body data
      * @return response status and its content
      */
-    public ResponseEntity<E> addData(@RequestBody E detail);
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ResponseEntity<E> addData(@RequestBody E detail);
 
     /**
      * Update Object
@@ -44,7 +49,8 @@ public interface EntityController<E> {
      * @param detail body data
      * @return response status and its content
      */
-    public ResponseEntity<E> updateData(@PathVariable int key, @RequestBody E detail);
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ResponseEntity<E> updateData(@PathVariable int key, @RequestBody E detail);
 
     /**
      * Delete object
@@ -52,7 +58,8 @@ public interface EntityController<E> {
      * @param key identifier
      * @return status of response and its content
      */
-    public ResponseEntity<E> deleteData(@PathVariable int key);
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ResponseEntity<E> deleteData(@PathVariable int key);
 
     /**
      * Create object
@@ -61,7 +68,7 @@ public interface EntityController<E> {
      * @param detail info
      * @return created object
      */
-    public E creatingData(E target, @RequestBody E detail);
+    E creatingData(E target, @RequestBody E detail);
 
     /**
      * Edit object
@@ -70,5 +77,5 @@ public interface EntityController<E> {
      * @param detail info
      * @return edited object
      */
-    public E editingData(E target, @RequestBody E detail);
+    E editingData(E target, @RequestBody E detail);
 }
