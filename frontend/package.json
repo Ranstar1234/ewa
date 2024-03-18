@@ -11,7 +11,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.2",
-    "core-js": "^3.26.1",
+    "core-js": "^3.36.0",
     "mapbox-gl": "^2.11.0",
     "vue": "^3.2.13",
     "vue-mapbox": "^0.4.1"
