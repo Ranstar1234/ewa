@@ -13,7 +13,7 @@ public interface EntityController<E> {
      *
      * @return list of data
      */
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     List<E> getAllData();
 
     /**
@@ -21,7 +21,7 @@ public interface EntityController<E> {
      *
      * @return list of data and its detail
      */
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     List<E> getAllDataDetail();
 
     /**
@@ -30,7 +30,7 @@ public interface EntityController<E> {
      * @param key identifier
      * @return data with the specific key
      */
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     E getData(@PathVariable int key);
 
     /**
@@ -39,7 +39,7 @@ public interface EntityController<E> {
      * @param detail body data
      * @return response status and its content
      */
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<E> addData(@RequestBody E detail);
 
     /**
@@ -49,7 +49,7 @@ public interface EntityController<E> {
      * @param detail body data
      * @return response status and its content
      */
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<E> updateData(@PathVariable int key, @RequestBody E detail);
 
     /**
@@ -58,7 +58,7 @@ public interface EntityController<E> {
      * @param key identifier
      * @return status of response and its content
      */
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<E> deleteData(@PathVariable int key);
 
     /**
